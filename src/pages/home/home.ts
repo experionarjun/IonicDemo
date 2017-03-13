@@ -21,8 +21,8 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.pages = [
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 },
+      { title: 'Home', component: Page1 },
+      { title: 'About', component: Page2 },
       { title: 'Logout', component: LoginPage }
     ];
   }
