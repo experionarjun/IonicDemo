@@ -40,9 +40,9 @@ export class Page1 implements OnInit{
   }
 
   showDetails(post){
-    this.navCtrl.push(DetailsPage,{
-      post:post
-    })
+    this.navCtrl.push(DetailsPage)
+    //   post:post
+    // })
   }
 
   newCat(){
