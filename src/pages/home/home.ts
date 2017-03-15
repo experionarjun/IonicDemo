@@ -3,8 +3,9 @@ import {Nav, NavController, NavParams } from 'ionic-angular';
 
 // path
 import { LoginPage } from '../login/login';
-import { Page1 } from './views/page1/page1';
-import { Page2 } from './views/page2/page2';
+import { Main } from './views/Main/Main';
+import { About } from './views/About/About';
+import { Maps } from './views/maps/maps';
 
 
 @Component({
@@ -15,14 +16,15 @@ export class HomePage {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Page1; 
+  rootPage: any = Main; 
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.pages = [
-      { title: 'Home', component: Page1 },
-      { title: 'About', component: Page2 },
+      { title: 'Home', component: Main },
+      { title: 'About', component: About },
+      { title: 'Maps', component: Maps },
       { title: 'Logout', component: LoginPage }
     ];
   }

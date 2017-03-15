@@ -7,10 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Maps</ion-title>
-    <!--<ion-buttons end>
-      <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
-    </ion-buttons>  -->
+    <ion-title> {{post.data.title}} </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,7 +15,7 @@
 
 <ion-content padding>
 
-  <!--<ion-card>
+  <ion-card>
     <img src="{{post.data.thumbnail}}"/>
   <ion-card-content>
     <ion-card-title>
@@ -40,13 +37,8 @@
       </ion-list>    
      <a ion-button block target="_blank" href="http://reddit.com/{{post.data.permalink}}">Read More &nbsp;<ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon></a>
   </ion-card-content>
-</ion-card>-->
+</ion-card>
 
 
-    <div #map id="map"></div>  
-    
-    <!--LATITUDE: {{lat}} <br>
-    LONGITUDE: {{long}} <br>-->
-    <!--<div #map id="map" style="height:100%;"></div>-->
 
 </ion-content>

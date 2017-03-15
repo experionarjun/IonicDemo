@@ -5,9 +5,10 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 
-import { Page1 } from '../pages/home/views/page1/page1';
-import { Page2 } from '../pages/home/views/page2/page2';
+import { Main } from '../pages/home/views/Main/Main';
+import { About } from '../pages/home/views/About/About';
 import { DetailsPage } from '../pages/home/views/details/details';
+import { Maps } from '../pages/home/views/maps/maps';
 
 
 @NgModule({
@@ -15,9 +16,10 @@ import { DetailsPage } from '../pages/home/views/details/details';
     MyApp,
     LoginPage,
     HomePage,
-    Page1,
-    Page2,
-    DetailsPage
+    Main,
+    About,
+    DetailsPage,
+    Maps
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -27,9 +29,10 @@ import { DetailsPage } from '../pages/home/views/details/details';
     MyApp,
     LoginPage,
     HomePage,
-    Page1,
-    Page2,
-    DetailsPage
+    Main,
+    About,
+    DetailsPage,
+    Maps
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
