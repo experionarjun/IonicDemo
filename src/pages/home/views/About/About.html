@@ -17,5 +17,9 @@
 
 
 <ion-content padding>
-  <p> This is a demo created by <strong>Arjun Sreedhar</strong> </p>
+
+  <button (click)='pickImage()' ion-button block> Pick Image </button>
+
+ <profile-pic [profile_pic]="img" ></profile-pic>
+  
 </ion-content>

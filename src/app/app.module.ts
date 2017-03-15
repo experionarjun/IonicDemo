@@ -10,6 +10,9 @@ import { About } from '../pages/home/views/About/About';
 import { DetailsPage } from '../pages/home/views/details/details';
 import { Maps } from '../pages/home/views/maps/maps';
 
+//shared
+import {profilePicComponent} from '../pages/Shared/profile_pic/profile_pic.component'
+
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { Maps } from '../pages/home/views/maps/maps';
     Main,
     About,
     DetailsPage,
-    Maps
+    Maps,
+
+    //shared
+    profilePicComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)

@@ -46,6 +46,7 @@ export class Main implements OnInit{
   }
 
   newCat(){
+    this.limit = 10;
     let loader = this.loadingCtrl.create({
     content: "Please wait...",
     duration : 3000
@@ -56,6 +57,18 @@ export class Main implements OnInit{
       loader.dismiss();
       this.posts = res.data.children;
     })
+  }
+
+  doInfinite(infiniteScroll) { 
+    console.log("infiniteScroll")
+    this.limit = this.limit+10; 
+    setTimeout(() => {
+      this.HCService.getPost(this.category,this.limit).subscribe(res => {
+      this.posts = res.data.children;
+    })
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
   }
 
   ionViewDidLoad() {

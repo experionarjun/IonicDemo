@@ -1,6 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import {Nav, NavController, NavParams } from 'ionic-angular';
 
+
 // path
 import { LoginPage } from '../login/login';
 import { Main } from './views/Main/Main';
@@ -21,6 +22,7 @@ export class HomePage {
   pages: Array<{title: string, component: any}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
     this.pages = [
       { title: 'Home', component: Main },
       { title: 'About', component: About },
@@ -38,6 +40,8 @@ export class HomePage {
 		this.navCtrl.setRoot(page.component);
 	}
   }
+
+  
 
 }
 
