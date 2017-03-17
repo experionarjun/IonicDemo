@@ -21,10 +21,10 @@ import {HomePage} from '../home/home';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  
+
   fail:boolean = false;
   constructor(public navCtrl: NavController) {
-    // console.log(appCtrl.getRootNav());
+    // console.log(appCtrl.getRootNav())
   }
 
   login(user,pass){

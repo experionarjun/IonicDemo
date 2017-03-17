@@ -12,6 +12,7 @@ import { Maps } from '../pages/home/views/maps/maps';
 
 //shared
 import {profilePicComponent} from '../pages/Shared/profile_pic/profile_pic.component'
+import {profilePicService} from '../pages/Shared/profile_pic/profile_pic.service'
 
 
 @NgModule({
@@ -40,6 +41,6 @@ import {profilePicComponent} from '../pages/Shared/profile_pic/profile_pic.compo
     DetailsPage,
     Maps
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},profilePicService]
 })
 export class AppModule {}

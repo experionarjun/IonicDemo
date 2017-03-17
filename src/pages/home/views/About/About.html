@@ -17,9 +17,20 @@
 
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Profile Picture
+    </ion-card-header>
+    <ion-card-content>
+      <ion-avatar>
+        <profile-pic></profile-pic>
+      </ion-avatar>
+      <br>
+      <br>
+      <button (click)='pickImage()' ion-button block> Pick Image </button>
+    </ion-card-content>
 
-  <button (click)='pickImage()' ion-button block> Pick Image </button>
+</ion-card>
 
- <profile-pic [profile_pic]="img" ></profile-pic>
-  
+
 </ion-content>

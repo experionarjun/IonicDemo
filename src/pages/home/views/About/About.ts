@@ -1,6 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
+import { Component } from '@angular/core';
+import { NavController, NavParams , ActionSheetController,AlertController } from 'ionic-angular';
+// import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
+import {Camera} from 'ionic-native';
+import {profilePicService} from '../../../Shared/profile_pic/profile_pic.service'
 
 @Component({
   selector: 'page-About',
@@ -9,11 +11,8 @@ import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
 
 export class About {
   img: any;
-  currentUser: string = 'hey';
 
-  @Output() updateProfPic = new EventEmitter();
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService) {
     this.img = null;
   }
 
@@ -26,22 +25,78 @@ export class About {
     //     destinationType   : Camera.DestinationType.DATA_URL,
     //     sourceType        : Camera.PictureSourceType.PHOTOLIBRARY
     // };
-    console.log(this.updateProfPic);
 
-    this.updateProfPic.emit(this.img)
-    let options = {
-      maximumImagesCount: 1,
-      width: 200,
-      height: 200,
-      quality: 100
-    };
-    ImagePicker.getPictures(options).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        this.img = results[i];
-        NativeStorage.setItem('profile_pic', this.img);
-      }
-    }, (err) => { });
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Choose',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: () => {
+            let options = {
+                quality : 50,
+                // allowEdit: true,
+                destinationType   : Camera.DestinationType.DATA_URL,
+                sourceType        : Camera.PictureSourceType.CAMERA
+            };
+            this.takePicture(options);
+          }
+        },{
+          text: 'Gallery',
+          handler: () => {
+            let options = {
+                quality : 50,
+                // allowEdit: true,
+                destinationType   : Camera.DestinationType.DATA_URL,
+                sourceType        : Camera.PictureSourceType.PHOTOLIBRARY
+            };
+            this.takePicture(options);
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takePicture(options:any){
+    Camera.getPicture(options).then((imageData) => {
+      this.img = "data:image/jpeg;base64," + imageData;
+    //  this.img = imageData;
+      this.profilePicService.updateProfPic(this.img);
+    }, (err) => {
+      let alert = this.alertCtrl.create({
+        title: 'Oops..',
+        subTitle: 'Something went wrong!',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    });
 
   }
 
 }
+
+
+
+
+
+
+//=======================IMAGE PICKER================================
+
+// let options = {
+//   maximumImagesCount: 1,
+//   width: 200,
+//   height: 200,
+//   quality: 100
+// };
+// ImagePicker.getPictures(options).then((results) => {
+//   for (var i = 0; i < results.length; i++) {
+//     this.img = results[i];
+//     this.profilePicService.updateProfPic(this.img);
+//   }
+// }, (err) => { });
