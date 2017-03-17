@@ -69,13 +69,8 @@ export class About {
     //  this.img = imageData;
       this.profilePicService.updateProfPic(this.img);
     }, (err) => {
-      let alert = this.alertCtrl.create({
-        title: 'Oops..',
-        subTitle: 'Something went wrong!',
-        buttons: ['Dismiss']
-      });
-      alert.present();
-    });
+          console.log(err);
+        });
 
   }
 

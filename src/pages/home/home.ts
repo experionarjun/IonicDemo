@@ -17,12 +17,12 @@ export class HomePage {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Main; 
+  rootPage: any = Main;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+
     this.pages = [
       { title: 'Home', component: Main },
       { title: 'About', component: About },
@@ -38,16 +38,7 @@ export class HomePage {
     	this.nav.setRoot(page.component);
 	}else{
 		this.navCtrl.setRoot(page.component);
-	}
+	 }
   }
 
-  
-
 }
-
-
-
-
-
-
-
