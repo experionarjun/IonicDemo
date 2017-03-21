@@ -25,7 +25,8 @@ export class profilePicComponent {
       );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 
 

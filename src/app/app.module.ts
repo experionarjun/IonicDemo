@@ -1,18 +1,29 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 
+//Main
 import { Main } from '../pages/home/views/Main/Main';
-import { About } from '../pages/home/views/About/About';
+//Tabs
+import { Tab1 } from '../pages/home/views/Main/Views/tab-1/tab-1'
+import { Tab2 } from '../pages/home/views/Main/Views/tab-2/tab-2'
+import { Tab3 } from '../pages/home/views/Main/Views/tab-3/tab-3'
+
+
+import { Settings } from '../pages/home/views/Settings/Settings';
 import { DetailsPage } from '../pages/home/views/details/details';
 import { Maps } from '../pages/home/views/maps/maps';
 
 //Shared Components
 import {profilePicComponent} from '../pages/Shared/profile_pic/profile_pic.component'
 import {profilePicService} from '../pages/Shared/profile_pic/profile_pic.service'
+
+import {TabsContentComponent} from '../pages/Shared/TabsContent/tabsContent.component'
+import {CategoriesServices} from '../pages/Shared/categories/categories.service'
 
 
 
@@ -25,14 +36,21 @@ import {profilePicService} from '../pages/Shared/profile_pic/profile_pic.service
     HomePage,
     //Home Components
     Main,
-    About,
+    //Tabs
+    Tab1,
+    Tab2,
+    Tab3,
+
+    Settings,
     DetailsPage,
     Maps,
     // Shared Components
-    profilePicComponent
+    profilePicComponent,
+    TabsContentComponent
   ],
   imports: [
         IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,11 +58,16 @@ import {profilePicService} from '../pages/Shared/profile_pic/profile_pic.service
     LoginPage,
 
     HomePage,
+
     Main,
-    About,
+    Tab1,
+    Tab2,
+    Tab3,
+
+    Settings,
     DetailsPage,
     Maps
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},profilePicService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},profilePicService, CategoriesServices]
 })
 export class AppModule {}

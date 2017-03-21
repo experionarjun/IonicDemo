@@ -1,78 +1,41 @@
-import { Component , OnInit } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { NativeStorage } from 'ionic-native';
 
-import { HomeContentServices } from '../../services/homeContent'
-import {DetailsPage} from '../details/details'
+import { Tab1 } from './Views/tab-1/tab-1'
+import { Tab2 } from './Views/tab-2/tab-2'
+import { Tab3 } from './Views/tab-3/tab-3'
 
+import {CategoriesServices} from '../../../Shared/categories/categories.service'
 
 /*
-  Generated class for the Page1 page.
+  Generated class for the Main tabs.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+  for more info on providers and Angular 2 DI.
 */
 @Component({
-  selector: 'page-Main',
-  templateUrl: 'Main.html',
-  providers : [HomeContentServices]
+  selector: 'page-main',
+  templateUrl: 'Main.html'
 })
-export class Main implements OnInit{
+export class Main {
 
-  category:string;
-  limit:number;
-  posts:any;
+  tab1Root: any = Tab1;
+  tab2Root: any = Tab2;
+  tab3Root: any = Tab3;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,private HCService : HomeContentServices) {
-    this.category = 'movies';
-    this.limit = 10;
+  tabsData:any;
+
+  constructor(public navCtrl: NavController, private categoriesServices:CategoriesServices) {
+    this.categoriesServices.getTabs().then(data => {
+       this.tabsData = data;
+       console.log('tabtitles',this.tabsData)
+     })
+
   }
 
   ngOnInit(){
-    let loader = this.loadingCtrl.create({
-    content: "Please wait...",
-    duration : 3000
-   })
-   loader.present();
-    this.HCService.getPost(this.category,this.limit).subscribe(res => {
-      loader.dismiss();
-      this.posts = res.data.children;
-    })
-  }
-
-  showDetails(post){
-    this.navCtrl.push(DetailsPage,{
-      post:post
-    })
-  }
-
-  newCat(){
-    this.limit = 10;
-    let loader = this.loadingCtrl.create({
-    content: "Please wait...",
-    duration : 3000
-   })
-
-    loader.present();
-    this.HCService.getPost(this.category,this.limit).subscribe(res => {
-      loader.dismiss();
-      this.posts = res.data.children;
-    })
-  }
-
-  doInfinite(infiniteScroll) { 
-    console.log("infiniteScroll")
-    this.limit = this.limit+10; 
-    setTimeout(() => {
-      this.HCService.getPost(this.category,this.limit).subscribe(res => {
-      this.posts = res.data.children;
-    })
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 500);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Page1Page');
+    console.log('init')
   }
 
 }

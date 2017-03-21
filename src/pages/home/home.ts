@@ -5,8 +5,9 @@ import {Nav, NavController, NavParams } from 'ionic-angular';
 // path
 import { LoginPage } from '../login/login';
 import { Main } from './views/Main/Main';
-import { About } from './views/About/About';
+import { Settings } from './views/Settings/Settings';
 import { Maps } from './views/maps/maps';
+
 
 
 @Component({
@@ -20,15 +21,17 @@ export class HomePage {
   rootPage: any = Main;
 
   pages: Array<{title: string, component: any}>;
+  value:number = 10;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.pages = [
       { title: 'Home', component: Main },
-      { title: 'About', component: About },
+      { title: 'Settings', component: Settings },
       { title: 'Maps', component: Maps },
       { title: 'Logout', component: LoginPage }
     ];
+
   }
 
   openPage(page) {
@@ -36,9 +39,9 @@ export class HomePage {
     // we wouldn't want the back button to show in this scenario
     if(page.title != 'Logout'){
     	this.nav.setRoot(page.component);
-	}else{
-		this.navCtrl.setRoot(page.component);
-	 }
+  	}else{
+  		this.navCtrl.setRoot(page.component);
+  	 }
   }
 
 }
