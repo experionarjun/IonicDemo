@@ -1,12 +1,18 @@
 import {Injectable} from '@angular/core';
 import {NativeStorage} from 'ionic-native'
 
+import { Subject }    from 'rxjs/Subject';
+
 @Injectable()
 
 export class CategoriesServices {
 
   AllCategories:category[];
   TabCategories:category[];
+
+  private isDataLoaded = new Subject<any>();
+
+  _isDataLoaded = this.isDataLoaded.asObservable();
 
   constructor(){
     this.AllCategories = [
@@ -19,49 +25,61 @@ export class CategoriesServices {
       {title:'News' , value: false },
       {title:'Funny' , value: false }
     ]
-    NativeStorage.getItem('TabCategories')
-     .then(
-     data => {
-       this.TabCategories = data;
-       console.log(data);
-     },
-     error =>{
-       this.TabCategories = [
-         {title:'Movies' , value: true },
-         {title:'Music' , value: true },
-         {title:'Sports' , value: true }
-       ]
-       NativeStorage.setItem('TabCategories',this.TabCategories);
-     });
+
   }
 
+isLoggedIn(){
+  NativeStorage.getItem('TabCategories')
+   .then(
+   data => {
+     this.TabCategories = data;
+    //  console.log(data);
+     this.isDataLoaded.next(data);
+   },
+   error =>{
+     this.TabCategories = [
+       {title:'Movies' , value: true },
+       {title:'Music' , value: true },
+       {title:'Sports' , value: true }
+     ]
+     this.isDataLoaded.next(this.TabCategories);
+     NativeStorage.setItem('TabCategories',this.TabCategories);
+   });
+}
 
-
-getTabs(){
-    // if(this.TabCategories){
-    //   return new Promise (function(resolve,reject){
-    //     resolve(this.TabCategories);
-    //   });
-    // }else{
-    console.log('getTabs');
-        return new Promise(function(resolve , reject){
-          NativeStorage.getItem('TabCategories')
-            .then(
-            data => {
-              resolve(data);
-            },error => {
-              let TabCategories = [
-                {title:'Movies' , value: true },
-                {title:'Music' , value: true },
-                {title:'Sports' , value: true }
-              ];
-              resolve(TabCategories)
-            }
-        )
-      })
-    }
+// getTabs(){
+//     // if(this.TabCategories){
+//     //   return new Promise (function(resolve,reject){
+//     //     resolve(this.TabCategories);
+//     //   });
+//     // }else{
+//     console.log('getTabs');
+//         return new Promise(function(resolve , reject){
+//           NativeStorage.getItem('TabCategories')
+//             .then(
+//             data => {
+//               resolve(data);
+//             },error => {
+//               let TabCategories = ['Movies','Music','Sports']
+//               // [
+//               //   {title:'Movies' , value: true },
+//               //   {title:'Music' , value: true },
+//               //   {title:'Sports' , value: true }
+//               // ];
+//               resolve(TabCategories)
+//             }
+//         )
+//       })
+//     }
 // }
 
+getTabs(){
+  let titles=[];
+  this.TabCategories.forEach( data => {
+    titles.push(data.title);
+  })
+  return titles;
+}
 
   getCategories(){
     this.setCategories();

@@ -8,6 +8,9 @@ import { Main } from './views/Main/Main';
 import { Settings } from './views/Settings/Settings';
 import { Maps } from './views/maps/maps';
 
+import {CategoriesServices} from '../Shared/categories/categories.service'
+
+
 
 
 @Component({
@@ -18,12 +21,13 @@ export class HomePage {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Main;
+  // rootPage: any = Main;
+  rootPage:any;
 
   pages: Array<{title: string, component: any}>;
   value:number = 10;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private categoriesServices:CategoriesServices) {
 
     this.pages = [
       { title: 'Home', component: Main },
@@ -31,6 +35,13 @@ export class HomePage {
       { title: 'Maps', component: Maps },
       { title: 'Logout', component: LoginPage }
     ];
+    this.categoriesServices._isDataLoaded.subscribe(data => {
+      // console.log(data);
+      if(data!=null){
+        this.rootPage = Main;
+      }
+    })
+
 
   }
 
@@ -42,6 +53,10 @@ export class HomePage {
   	}else{
   		this.navCtrl.setRoot(page.component);
   	 }
+  }
+
+  ionViewDidLoad(){
+    this.categoriesServices.isLoggedIn()
   }
 
 }

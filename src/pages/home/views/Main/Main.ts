@@ -24,18 +24,31 @@ export class Main {
   tab2Root: any = Tab2;
   tab3Root: any = Tab3;
 
-  tabsData:any;
+  tabsData:any = [];
+
+
 
   constructor(public navCtrl: NavController, private categoriesServices:CategoriesServices) {
-    this.categoriesServices.getTabs().then(data => {
-       this.tabsData = data;
-       console.log('tabtitles',this.tabsData)
-     })
+
+    // this.tabsData = [
+    //   {title:'Movies' , value: true },
+    //   {title:'Music' , value: true },
+    //   {title:'Sports' , value: true }
+    // ];
+
+    // this.tabsData = ['Movies','Music','Sports']
+
+    // console.log( this.tabsData[0])
 
   }
 
   ngOnInit(){
-    console.log('init')
+    // this.categoriesServices.getTabs().then(data => {
+    //    this.tabsData = data;
+    //    console.log('tabtitles',this.tabsData)
+    //  })
+    this.tabsData = this.categoriesServices.getTabs();
+    console.log('init one')
   }
 
 }

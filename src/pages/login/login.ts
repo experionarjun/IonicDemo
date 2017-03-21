@@ -39,11 +39,11 @@ export class LoginPage {
     //       this.fail = true;
     //     }
     //   } )
-    if(user == 'arjun' && pass == 'l00p123'){
+    // if(user == 'arjun' && pass == 'l00p123'){
        this.navCtrl.setRoot(HomePage);
-    }else{
-          this.fail = true;
-        }
+    // }else{
+    //       this.fail = true;
+    //     }
 
   }
   ionViewDidLoad() {
