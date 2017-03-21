@@ -1,0 +1,21 @@
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor='let post of posts'>
+      <ion-thumbnail item-left>
+        <img src="{{post.data.thumbnail}}">
+      </ion-thumbnail>
+      <h2>{{post.data.title}}</h2>
+      <p>
+        <ion-icon name="thumbs-up"> {{post.data.score}}</ion-icon>&nbsp;&nbsp;
+        <ion-icon name="chatboxes"> {{post.data.num_comments}}</ion-icon>
+      </p>
+      <button ion-button clear item-right (click)='showDetails(post)'>View</button>
+
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+     <ion-infinite-scroll-content></ion-infinite-scroll-content>
+   </ion-infinite-scroll>
+
+</ion-content>
