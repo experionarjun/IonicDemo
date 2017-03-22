@@ -14,8 +14,7 @@ import { CategoriesServices, category } from '../../../Shared/categories/categor
 export class Settings {
   img: any;
   categories:category[];
-  backupCat:category[];
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices : CategoriesServices) {
     this.img = null;
     this.initCat();
