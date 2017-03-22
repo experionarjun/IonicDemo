@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 
 import { Tab1 } from './Views/tab-1/tab-1'
 import { Tab2 } from './Views/tab-2/tab-2'
@@ -26,29 +25,10 @@ export class Main {
 
   tabsData:any = [];
 
-
-
-  constructor(public navCtrl: NavController, private categoriesServices:CategoriesServices) {
-
-    // this.tabsData = [
-    //   {title:'Movies' , value: true },
-    //   {title:'Music' , value: true },
-    //   {title:'Sports' , value: true }
-    // ];
-
-    // this.tabsData = ['Movies','Music','Sports']
-
-    // console.log( this.tabsData[0])
-
-  }
+  constructor(public navCtrl: NavController, private categoriesServices:CategoriesServices){}
 
   ngOnInit(){
-    // this.categoriesServices.getTabs().then(data => {
-    //    this.tabsData = data;
-    //    console.log('tabtitles',this.tabsData)
-    //  })
     this.tabsData = this.categoriesServices.getTabs();
-    console.log('init one')
   }
 
 }

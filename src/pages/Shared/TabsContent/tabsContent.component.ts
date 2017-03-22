@@ -12,7 +12,7 @@ import {DetailsPage} from '../../home/views/details/details'
 
 export class TabsContentComponent implements OnInit{
 
-  @Input() category;
+  @Input() category:string;
 
   limit:number;
   posts:any;
@@ -28,7 +28,7 @@ export class TabsContentComponent implements OnInit{
     duration : 3000
    })
    loader.present();
-    this.TCService.getPost(this.category.title.toLowerCase(),this.limit).subscribe(res => {
+    this.TCService.getPost(this.category.toLowerCase(),this.limit).subscribe(res => {
       loader.dismiss();
       this.posts = res.data.children;
     })
@@ -44,7 +44,7 @@ export class TabsContentComponent implements OnInit{
     console.log("infiniteScroll")
     this.limit = this.limit+10;
     setTimeout(() => {
-      this.TCService.getPost(this.category.title.toLowerCase(),this.limit).subscribe(res => {
+      this.TCService.getPost(this.category.toLowerCase(),this.limit).subscribe(res => {
       this.posts = res.data.children;
     })
       console.log('Async operation has ended');

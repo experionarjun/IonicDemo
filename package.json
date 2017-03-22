@@ -38,7 +38,10 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-console",
     "ionic-plugin-keyboard",
-    "cordova-plugin-splashscreen"
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-camera",
+    "cordova-plugin-nativestorage",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [],
   "description": "newApp: An Ionic project"

@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams , ActionSheetController,AlertController } from 'ionic-angular';
 // import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
-import {Camera} from 'ionic-native';
-import {profilePicService} from '../../../Shared/profile_pic/profile_pic.service'
+import { Camera } from 'ionic-native';
+import { profilePicService } from '../../../Shared/profile_pic/profile_pic.service'
 import { CategoriesServices, category } from '../../../Shared/categories/categories.service';
-
-
 
 
 @Component({
@@ -31,7 +29,7 @@ export class Settings {
     //     let options = {
     //     destinationType   : Camera.DestinationType.DATA_URL,
     //     sourceType        : Camera.PictureSourceType.PHOTOLIBRARY
-    // };funny
+    // };
 
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Choose',

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CategoriesServices,category } from '../../../../../Shared/categories/categories.service';
-
 
 /*
   Generated class for the Tab2 page.
@@ -15,14 +13,9 @@ import { CategoriesServices,category } from '../../../../../Shared/categories/ca
 })
 export class Tab3 {
 
-  tab:category;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private categoriesServices:CategoriesServices) {
-    //  this.tab = categoriesServices.setTab(2);
-    this.tab = {title:'Sports', value:true}
-
+  tab:string;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.tab = navParams.data;
   }
 
-  ngOnInit() {
-    // this.categoriesServices.setTab(2);
-  }
 }
