@@ -31,7 +31,7 @@ export class HomePage {
       { title: 'Logout', component: LoginPage }
     ];
     this.categoriesServices._isDataLoaded.subscribe(data => {
-      if (data == true) {
+      if (data != null) {
         this.rootPage = Main;
       }
     })

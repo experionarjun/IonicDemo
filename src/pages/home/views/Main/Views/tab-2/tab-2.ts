@@ -9,7 +9,8 @@ import { NavController, NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-tab-2',
-  templateUrl: 'tab-2.html'
+  templateUrl: 'tab-2.html',
+
 })
 export class Tab2 {
 

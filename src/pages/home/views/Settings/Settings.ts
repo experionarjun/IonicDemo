@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams , ActionSheetController,AlertController } from 'ionic-angular';
+import { Component,ApplicationRef } from '@angular/core';
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 // import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
 import { Camera } from 'ionic-native';
 import { profilePicService } from '../../../Shared/profile_pic/profile_pic.service'
@@ -13,15 +13,14 @@ import { CategoriesServices, category } from '../../../Shared/categories/categor
 
 export class Settings {
   img: any;
-  categories:category[];
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices : CategoriesServices) {
+  categories: category[];
+  isShowCat: boolean = false;
+  isThreeCat:boolean;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams , private AppRef: ApplicationRef,  public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices: CategoriesServices) {
     this.img = null;
     this.initCat();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Page2Page');
+    this.isThreeCat = true;
   }
 
   pickImage() {
@@ -37,25 +36,26 @@ export class Settings {
           text: 'Camera',
           handler: () => {
             let options = {
-                quality : 50,
-                // allowEdit: true,
-                destinationType   : Camera.DestinationType.DATA_URL,
-                sourceType        : Camera.PictureSourceType.CAMERA
-            };false
+              quality: 50,
+              allowEdit: true,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA
+            }; false
             this.takePicture(options);
           }
-        },{
+        }, {
           text: 'Gallery',
           handler: () => {
             let options = {
-                quality : 50,
-                // allowEdit: true,
-                destinationType   : Camera.DestinationType.DATA_URL,
-                sourceType        : Camera.PictureSourceType.PHOTOLIBRARY
+              quality: 50,
+              allowEdit: true,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM
+      //*************Use SAVEDPHOTOALBUM to get actual gallery*******************
             };
             this.takePicture(options);
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -67,20 +67,44 @@ export class Settings {
     actionSheet.present();
   }
 
-  takePicture(options:any){
+  takePicture(options: any) {
     Camera.getPicture(options).then((imageData) => {
       this.img = "data:image/jpeg;base64," + imageData;
-    //  this.img = imageData;
+      //  this.img = imageData;
       this.profilePicService.updateProfPic(this.img);
     }, (err) => {
-          console.log(err);
-        });
+      console.log(err);
+    });
 
   }
 
-  initCat(){
-        this.categories = this.categoriesServices.getCategories();
-        console.log(this.categories);
+  initCat() {
+    this.categories = this.categoriesServices.getCategories();
+    console.log(this.categories);
+  }
+
+  showCat() {
+    if (this.isShowCat == false) {
+      this.isShowCat = true;
+    } else {
+      this.isShowCat = false;
+    }
+  }
+
+  isChecked(i){
+
+    console.log(i)
+    // let flag = 0;
+    //  this.categories.forEach( category => {
+    //    if(category.value === true){
+    //      flag++;
+    //    }
+    //  })
+    //  if(flag == 2){
+    //    this.isThreeCat = false;
+    //  }else{
+    //    this.isThreeCat = true;
+    //  }
   }
 
 }

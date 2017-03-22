@@ -17,19 +17,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class DetailsPage {
   
- 
-
   post:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.post = navParams.get('post');
-    console.log(this.post);
-  }
- 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailsPage');
   }
 
 }
-
-

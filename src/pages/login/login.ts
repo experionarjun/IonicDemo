@@ -24,7 +24,6 @@ export class LoginPage {
 
   fail:boolean = false;
   constructor(public navCtrl: NavController) {
-    // console.log(appCtrl.getRootNav())
   }
 
   login(user,pass){
@@ -46,8 +45,4 @@ export class LoginPage {
     //     }
 
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
 }

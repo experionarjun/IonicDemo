@@ -1,6 +1,7 @@
-<ion-content padding>
+<ion-content fullscreen>
   <ion-list>
-    <ion-item *ngFor='let post of posts'>
+    <ion-item-sliding *ngFor='let post of posts'>
+    <a ion-item (click)='showDetails(post)'>
       <ion-thumbnail item-left>
         <img src="{{post.data.thumbnail}}">
       </ion-thumbnail>
@@ -9,13 +10,15 @@
         <ion-icon name="thumbs-up"> {{post.data.score}}</ion-icon>&nbsp;&nbsp;
         <ion-icon name="chatboxes"> {{post.data.num_comments}}</ion-icon>
       </p>
-      <button ion-button clear item-right (click)='showDetails(post)'>View</button>
-
-    </ion-item>
+    </a>
+    <ion-item-options side="right">
+      <button ion-button color="secondary" (click)="showDetails(post)"><ion-icon ios="ios-more" md="md-more"></ion-icon> More</button>
+      <button ion-button color="danger" (click)="showToast()"><ion-icon ios="ios-trash" md="md-trash"></ion-icon> Delete</button>
+    </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
      <ion-infinite-scroll-content></ion-infinite-scroll-content>
    </ion-infinite-scroll>
-
 </ion-content>

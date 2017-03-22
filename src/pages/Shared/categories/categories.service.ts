@@ -18,7 +18,7 @@ export class CategoriesServices {
 //
 //******************************************************************************
 
-  private isDataLoaded = new Subject<boolean>();
+  private isDataLoaded = new Subject<any>();
 
   _isDataLoaded = this.isDataLoaded.asObservable();
 
@@ -37,13 +37,13 @@ export class CategoriesServices {
 
   isLoggedIn() {
     if (this.TabCategories) {
-      this.isDataLoaded.next(true);
+      this.isDataLoaded.next(this.TabCategories);
     } else {
       NativeStorage.getItem('TabCategories')
         .then(
         data => {
           this.TabCategories = data;
-          this.isDataLoaded.next(true);
+          this.isDataLoaded.next(data);
         },
         error => {
           this.TabCategories = [
@@ -51,7 +51,7 @@ export class CategoriesServices {
             'Music',
             'Sports'
           ]
-          this.isDataLoaded.next(true);
+          this.isDataLoaded.next(this.TabCategories);
           NativeStorage.setItem('TabCategories', this.TabCategories);
         });
     }

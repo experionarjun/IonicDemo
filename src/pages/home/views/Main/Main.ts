@@ -25,10 +25,7 @@ export class Main {
 
   tabsData:any = [];
 
-  constructor(public navCtrl: NavController, private categoriesServices:CategoriesServices){}
-
-  ngOnInit(){
+  constructor(public navCtrl: NavController, private categoriesServices:CategoriesServices){
     this.tabsData = this.categoriesServices.getTabs();
   }
-
 }

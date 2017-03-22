@@ -66,7 +66,9 @@ import {CategoriesServices} from '../pages/Shared/categories/categories.service'
 
     Settings,
     DetailsPage,
-    Maps
+    Maps,
+
+    profilePicComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},profilePicService, CategoriesServices]
 })

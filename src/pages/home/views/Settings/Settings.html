@@ -16,32 +16,68 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      Profile Picture
-    </ion-card-header>
-    <ion-card-content>
-      <ion-avatar>
-        <profile-pic></profile-pic>
-      </ion-avatar>
-      <br>
-      <br>
-      <button (click)='pickImage()' ion-button block> Pick Image </button>
-    </ion-card-content>
+<ion-content>
 
-  </ion-card>
 
-  <ion-card>
-      <ion-card-header>
+
+<ion-list>
+  <ion-list-header>
+     Profile Picture
+     <!-- <button ion-button outline item-right (click)='pickImage()'><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp;Edit</button> -->
+ </ion-list-header>
+ <ion-item>
+    <profile-pic></profile-pic>
+    <ion-fab right bottom>
+    <button ion-fab (click)='pickImage()'><ion-icon name="camera"></ion-icon></button>
+  </ion-fab>
+ </ion-item>
+
+  <ion-item-divider (click)='showCat()'>
+    Categories
+    <a item-right ><ion-icon *ngIf='!isShowCat' name="arrow-dropright"></ion-icon><ion-icon *ngIf='isShowCat' name="arrow-dropdown"></ion-icon></a>
+  </ion-item-divider>
+  <div *ngIf='isShowCat'>
+    <ion-item *ngFor="let category of categories;let i = index;">
+      <!-- <ion-label>{{category.title}}</ion-label> -->
+      <!-- <ion-checkbox [ngModel]="category.value" (ionChange)='isChecked(i)' ></ion-checkbox> -->
+      <input type='checkbox' [checked] = 'category.value' > {{category.title}}
+    </ion-item>
+    <ion-item >
+      <button ion-button small color='light' item-right (click)='initCat()'>Cancel</button>
+      <button ion-button small item-right>Save</button>
+    </ion-item>
+  </div>
+  <ion-item-divider>
+    Number
+  </ion-item-divider>
+</ion-list>
+</ion-content>
+
+
+<!-- <ion-content padding> -->
+<!-- <ion-card>
+  <ion-card-header>
+
+  </ion-card-header>
+  <ion-card-content>
+    <ion-avatar>
+      <profile-pic></profile-pic>
+    </ion-avatar>
+    <br>
+    <br>
+    <button (click)='pickImage()' ion-button block> Pick Image </button>
+  </ion-card-content>
+
+</ion-card> -->
+
+
+  <!-- <ion-card> -->
+      <!-- <ion-card-header>
         Categories
       </ion-card-header>
-      <ion-card-content>
-        <!-- <ion-item>
-          <ion-label>Sausage</ion-label>
-          <ion-checkbox [(ngModel)]="sausage" (ionChange)='checkboxTest()'></ion-checkbox>
-        </ion-item> -->
-        <ion-item *ngFor="let category of categories;">
+      <ion-card-content> -->
+
+        <!-- <ion-item *ngFor="let category of categories;">
           <ion-label>{{category.title}}</ion-label>
           <ion-checkbox [ngModel]="category.value" ></ion-checkbox>
         </ion-item>
@@ -52,4 +88,7 @@
       </ion-card-content>
     </ion-card>
 
-</ion-content>
+</ion-content> -->
+
+
+<!-- [disabled]='!category.value && isThreeCat' (ionChange)='isChecked()' -->
