@@ -14,17 +14,18 @@
 
 
 <ion-content padding>
-	<h3>Login!</h3>
-    <div *ngIf="fail"><ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> Invalid User/Password </div>
-    <ion-list>
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input #user type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input #pass type="password"></ion-input>
-      </ion-item>
-    </ion-list>
-    <button (click)='login(user.value,pass.value)' ion-button full>Login</button>
+  <h3>Login!</h3>
+  <div *ngIf="fail">
+    <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon> Invalid User/Password </div>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input #user type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input #pass type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button (click)='login(user.value,pass.value)' ion-button full>Login</button>
 </ion-content>

@@ -1,5 +1,5 @@
-import { Component,ApplicationRef } from '@angular/core';
-import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 // import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
 import { Camera } from 'ionic-native';
 import { profilePicService } from '../../../Shared/profile_pic/profile_pic.service'
@@ -15,12 +15,11 @@ export class Settings {
   img: any;
   categories: category[];
   isShowCat: boolean = false;
-  isThreeCat:boolean;
+  categorySelection: string[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams , private AppRef: ApplicationRef,  public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices: CategoriesServices) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices: CategoriesServices) {
     this.img = null;
     this.initCat();
-    this.isThreeCat = true;
   }
 
   pickImage() {
@@ -51,16 +50,13 @@ export class Settings {
               allowEdit: true,
               destinationType: Camera.DestinationType.DATA_URL,
               sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM
-      //*************Use SAVEDPHOTOALBUM to get actual gallery*******************
+              //*************Use SAVEDPHOTOALBUM to get actual gallery*******************
             };
             this.takePicture(options);
           }
         }, {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
         }
       ]
     });
@@ -70,17 +66,17 @@ export class Settings {
   takePicture(options: any) {
     Camera.getPicture(options).then((imageData) => {
       this.img = "data:image/jpeg;base64," + imageData;
-      //  this.img = imageData;
       this.profilePicService.updateProfPic(this.img);
-    }, (err) => {
-      console.log(err);
-    });
-
+    }, (err) => { });
   }
 
   initCat() {
     this.categories = this.categoriesServices.getCategories();
-    console.log(this.categories);
+    this.categories.forEach(category => {
+      if (category.value == true) {
+        this.categorySelection.push(category.title);
+      }
+    })
   }
 
   showCat() {
@@ -91,22 +87,26 @@ export class Settings {
     }
   }
 
-  isChecked(i){
+  saveCat() {
+    let newCatgories = [];
+    this.categories.forEach(category => {
+      if (category.value == true) {
+        newCatgories.push(category.title)
 
-    console.log(i)
-    // let flag = 0;
-    //  this.categories.forEach( category => {
-    //    if(category.value === true){
-    //      flag++;
-    //    }
-    //  })
-    //  if(flag == 2){
-    //    this.isThreeCat = false;
-    //  }else{
-    //    this.isThreeCat = true;
-    //  }
+      }
+    })
+    if (newCatgories.length != 3) {
+      let alert = this.alert.create({
+        title: 'Warning',
+        subTitle: 'Only three categories can be selected',
+        buttons: ['Dismiss']
+      })
+      alert.present();
+    } else {
+      this.categoriesServices.newCatgories(newCatgories);
+      this.isShowCat = false;
+    }
   }
-
 }
 
 

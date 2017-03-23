@@ -8,17 +8,18 @@ import {profilePicService} from './profile_pic.service';
 })
 export class profilePicComponent {
 
-  profile_pic:string;
+  profile_pic: string;
 
-  constructor(private profilePicService:profilePicService) {
-    this.profilePicService.changeDP$.subscribe(data =>{
-      this.profile_pic = data;
-      NativeStorage.setItem('profile_pic', data);
-    })
+  constructor(private profilePicService: profilePicService) {
     NativeStorage.getItem('profile_pic')
       .then(
       data => this.profile_pic = data,
-      error => this.profile_pic = '../../assets/profile.png'
+      error => this.profile_pic = './assets/profile.jpg'
       );
+
+    this.profilePicService.changeDP$.subscribe(data => {
+      this.profile_pic = data;
+      NativeStorage.setItem('profile_pic', data);
+    })
   }
 }

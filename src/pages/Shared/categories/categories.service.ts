@@ -44,6 +44,7 @@ export class CategoriesServices {
         data => {
           this.TabCategories = data;
           this.isDataLoaded.next(data);
+          this.setCategories();
         },
         error => {
           this.TabCategories = [
@@ -53,42 +54,18 @@ export class CategoriesServices {
           ]
           this.isDataLoaded.next(this.TabCategories);
           NativeStorage.setItem('TabCategories', this.TabCategories);
+          this.setCategories();
         });
     }
   }
 
-  // getTabs(){
-  //     // if(this.TabCategories){
-  //     //   return new Promise (function(resolve,reject){
-  //     //     resolve(this.TabCategories);
-  //     //   });
-  //     // }else{
-  //     console.log('getTabs');
-  //         return new Promise(function(resolve , reject){
-  //           NativeStorage.getItem('TabCategories')
-  //             .then(
-  //             data => {
-  //               resolve(data);
-  //             },error => {
-  //               let TabCategories = ['Movies','Music','Sports']
-  //               // [
-  //               //   {title:'Movies' , value: true },
-  //               //   {title:'Music' , value: true },
-  //               //   {title:'Sports' , value: true }
-  //               // ];
-  //               resolve(TabCategories)
-  //             }
-  //         )
-  //       })
-  //     }
-  // }
+
 
   getTabs() {
     return this.TabCategories;
   }
 
   getCategories() {
-    this.setCategories();
     return this.AllCategories;
   }
 
@@ -101,6 +78,11 @@ export class CategoriesServices {
       })
     })
   }
+  newCatgories(newCat){
+    this.TabCategories = newCat;
+    NativeStorage.setItem('TabCategories', this.TabCategories);
+  }
+
 
 }
 

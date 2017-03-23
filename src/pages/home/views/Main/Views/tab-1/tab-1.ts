@@ -17,5 +17,4 @@ export class Tab1 {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
      this.tab = navParams.data;
   }
-
 }

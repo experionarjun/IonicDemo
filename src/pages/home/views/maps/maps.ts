@@ -16,11 +16,11 @@ declare var google;
 })
 export class Maps {
 
-@ViewChild('map') mapElement: ElementRef;
+  @ViewChild('map') mapElement: ElementRef;
   map: any;
 
-  lat:any;
-  long:any;
+  lat: any;
+  long: any;
   watch: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -37,12 +37,12 @@ export class Maps {
     // this.long = data.coords.longitude
     // });
   }
-   ngOnInit(){
-     this.loadMap();
+  ngOnInit() {
+    this.loadMap();
   }
-  loadMap(){
+  loadMap() {
 
-   Geolocation.getCurrentPosition().then((position) => {
+    Geolocation.getCurrentPosition().then((position) => {
 
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -54,35 +54,33 @@ export class Maps {
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    }, (err) => {
-      console.log(err);
-    });
+    }, (err) => { });
 
   }
 
-addMarker(){
+  addMarker() {
 
-  let marker = new google.maps.Marker({
-    map: this.map,
-    animation: google.maps.Animation.DROP,
-    position: this.map.getCenter()
-  });
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: this.map.getCenter()
+    });
 
-  let content = "<h4>Information!</h4>";
+    let content = "<h4>Information!</h4>";
 
-  this.addInfoWindow(marker, content);
+    this.addInfoWindow(marker, content);
 
-}
+  }
 
-addInfoWindow(marker, content){
+  addInfoWindow(marker, content) {
 
-  let infoWindow = new google.maps.InfoWindow({
-    content: content
-  });
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
 
-  google.maps.event.addListener(marker, 'click', () => {
-    infoWindow.open(this.map, marker);
-  });
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
 
-}
+  }
 }

@@ -25,8 +25,7 @@ export class TabsContentComponent implements OnInit {
 
   ngOnInit() {
     let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 1000
+      content: "Please wait..."
     })
     loader.present();
     this.TCService.getPost(this.category.toLowerCase(), this.limit).subscribe(res => {
@@ -52,7 +51,7 @@ export class TabsContentComponent implements OnInit {
   showToast() {
     let toast = this.toastCtrl.create({
       message: 'Item Deleted',
-      duration: 2000,
+      duration: 1000,
       position: 'top'
     });
     toast.present(toast);

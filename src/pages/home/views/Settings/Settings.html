@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-  	<button ion-button menuToggle>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Settings</ion-title>
@@ -20,37 +20,42 @@
 
 
 
-<ion-list>
-  <ion-list-header>
-     Profile Picture
-     <!-- <button ion-button outline item-right (click)='pickImage()'><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp;Edit</button> -->
- </ion-list-header>
- <ion-item>
-    <profile-pic></profile-pic>
-    <ion-fab right bottom>
-    <button ion-fab (click)='pickImage()'><ion-icon name="camera"></ion-icon></button>
-  </ion-fab>
- </ion-item>
+  <ion-list>
+    <ion-list-header>
+      Profile Picture
+      <!-- <button ion-button outline item-right (click)='pickImage()'><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp;Edit</button> -->
+    </ion-list-header>
+    <ion-item>
 
-  <ion-item-divider (click)='showCat()'>
-    Categories
-    <a item-right ><ion-icon *ngIf='!isShowCat' name="arrow-dropright"></ion-icon><ion-icon *ngIf='isShowCat' name="arrow-dropdown"></ion-icon></a>
-  </ion-item-divider>
-  <div *ngIf='isShowCat'>
-    <ion-item *ngFor="let category of categories;let i = index;">
-      <!-- <ion-label>{{category.title}}</ion-label> -->
-      <!-- <ion-checkbox [ngModel]="category.value" (ionChange)='isChecked(i)' ></ion-checkbox> -->
-      <input type='checkbox' [checked] = 'category.value' > {{category.title}}
+        <profile-pic></profile-pic>
+
+      <ion-fab right bottom>
+        <button ion-fab (click)='pickImage()'><ion-icon name="camera"></ion-icon></button>
+      </ion-fab>
     </ion-item>
-    <ion-item >
-      <button ion-button small color='light' item-right (click)='initCat()'>Cancel</button>
-      <button ion-button small item-right>Save</button>
-    </ion-item>
-  </div>
-  <ion-item-divider>
-    Number
-  </ion-item-divider>
-</ion-list>
+
+    <ion-item-divider (click)='showCat()'>
+      Categories
+      <a item-right>
+        <ion-icon *ngIf='!isShowCat' name="arrow-dropright"></ion-icon>
+        <ion-icon *ngIf='isShowCat' name="arrow-dropdown"></ion-icon>
+      </a>
+    </ion-item-divider>
+    <div *ngIf='isShowCat'>
+      <ion-item>
+        <p>Select only three categories. </p>
+      </ion-item>
+      <ion-item *ngFor="let category of categories;let i = index;">
+        <ion-label>{{category.title}}</ion-label>
+        <ion-checkbox [(ngModel)]="category.value"  item-right></ion-checkbox>
+        <!-- <input type='checkbox' [checked]='category.value'> {{category.title}} -->
+      </ion-item>
+      <ion-item>
+        <button ion-button small item-right (click)='saveCat()'>Save</button>
+      </ion-item>
+    </div>
+
+  </ion-list>
 </ion-content>
 
 
@@ -71,13 +76,13 @@
 </ion-card> -->
 
 
-  <!-- <ion-card> -->
-      <!-- <ion-card-header>
+<!-- <ion-card> -->
+<!-- <ion-card-header>
         Categories
       </ion-card-header>
       <ion-card-content> -->
 
-        <!-- <ion-item *ngFor="let category of categories;">
+<!-- <ion-item *ngFor="let category of categories;">
           <ion-label>{{category.title}}</ion-label>
           <ion-checkbox [ngModel]="category.value" ></ion-checkbox>
         </ion-item>
@@ -92,3 +97,11 @@
 
 
 <!-- [disabled]='!category.value && isThreeCat' (ionChange)='isChecked()' -->
+
+
+<!-- <ion-item>
+  <ion-label>Category</ion-label>
+  <ion-select id='selectCatbox' [(ngModel)]='categorySelection' multiple="true" selectedText=' ' (ionChange)='isCatSelected()'>
+    <ion-option *ngFor='let category of categories;' [value]='category.title'>{{category.title}}</ion-option>
+  </ion-select>
+</ion-item> -->
