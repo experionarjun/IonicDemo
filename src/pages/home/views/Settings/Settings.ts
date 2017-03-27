@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController, AlertController,ToastController } from 'ionic-angular';
 // import { ImagePicker, Camera, NativeStorage } from 'ionic-native';
 import { Camera } from 'ionic-native';
 import { profilePicService } from '../../../Shared/profile_pic/profile_pic.service'
@@ -17,7 +17,7 @@ export class Settings {
   isShowCat: boolean = false;
   categorySelection: string[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alert: AlertController, public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices: CategoriesServices) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, private alert: AlertController, public actionSheetCtrl: ActionSheetController, private profilePicService: profilePicService, private categoriesServices: CategoriesServices) {
     this.img = null;
     this.initCat();
   }
@@ -105,6 +105,12 @@ export class Settings {
     } else {
       this.categoriesServices.newCatgories(newCatgories);
       this.isShowCat = false;
+      let toast = this.toastCtrl.create({
+        message: 'Categories Changed',
+        duration: 1000,
+        position: 'top'
+      });
+      toast.present(toast);
     }
   }
 }

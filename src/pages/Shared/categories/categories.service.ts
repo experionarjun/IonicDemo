@@ -22,18 +22,7 @@ export class CategoriesServices {
 
   _isDataLoaded = this.isDataLoaded.asObservable();
 
-  constructor() {
-    this.AllCategories = [
-      { title: 'Movies', value: false },
-      { title: 'Music', value: false },
-      { title: 'Sports', value: false },
-      { title: 'Gaming', value: false },
-      { title: 'Arts', value: false },
-      { title: 'Food', value: false },
-      { title: 'News', value: false },
-      { title: 'Funny', value: false }
-    ]
-  }
+  constructor() {}
 
   isLoggedIn() {
     if (this.TabCategories) {
@@ -44,7 +33,6 @@ export class CategoriesServices {
         data => {
           this.TabCategories = data;
           this.isDataLoaded.next(data);
-          this.setCategories();
         },
         error => {
           this.TabCategories = [
@@ -54,7 +42,6 @@ export class CategoriesServices {
           ]
           this.isDataLoaded.next(this.TabCategories);
           NativeStorage.setItem('TabCategories', this.TabCategories);
-          this.setCategories();
         });
     }
   }
@@ -66,10 +53,21 @@ export class CategoriesServices {
   }
 
   getCategories() {
+    this.setCategories();
     return this.AllCategories;
   }
 
   setCategories() {
+    this.AllCategories = [
+      { title: 'Movies', value: false },
+      { title: 'Music', value: false },
+      { title: 'Sports', value: false },
+      { title: 'Gaming', value: false },
+      { title: 'Arts', value: false },
+      { title: 'Food', value: false },
+      { title: 'News', value: false },
+      { title: 'Funny', value: false }
+    ]
     this.AllCategories.forEach(all => {
       this.TabCategories.forEach(tab => {
         if (tab == all.title) {
